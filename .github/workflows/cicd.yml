@@ -38,7 +38,7 @@ jobs:
             TAG=${{ steps.set-tag.outputs.tag }}
             echo "Updating image tag in docker-compose.yaml with: $TAG"
             awk -v tag="$TAG" '
-              $0 ~ /container_name: frontendPortal/ { found=1 }
+              $0 ~ /container_name: frontend_portal/ { found=1 }
               found && $0 ~ /image:/ {
                 print "    image: \"saurabh2025operatiomarketing/rocket-advance-master-main:" tag "\""
                 found=0
@@ -46,5 +46,5 @@ jobs:
               }
               { print }
             ' docker-compose.yaml > docker-compose.tmp && mv docker-compose.tmp docker-compose.yaml
-            docker-compose pull frontendPortal
-            docker-compose up -d --no-deps --force-recreate frontendPortal
+            docker-compose pull frontend_portal
+            docker-compose up -d --no-deps --force-recreate frontend_portal
